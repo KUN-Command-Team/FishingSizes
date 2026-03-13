@@ -12,6 +12,8 @@ public record FishSize(float min, float max) {
 
     public float randomSize(RandomSource random) {
         if (max <= min) return min;
-        return min + random.nextFloat() * (max - min);
+        float randNum1 = min + random.nextFloat() * (max - min);
+        float randNum2 = min + random.nextFloat() * (max - min);
+        return (randNum1 + randNum2) / 2f;
     }
 }
