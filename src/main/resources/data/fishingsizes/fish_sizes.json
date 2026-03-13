@@ -4,10 +4,18 @@
     "minecraft:cod": {
       "min": 10.0,
       "max": 30.0
+    },
+    "minecraft:salmon": {
+      "min": 10.0,
+      "max": 30.0
+    },
+    "minecraft:tropical_fish": {
+      "min": 10.0,
+      "max": 30.0
+    },
+    "minecraft:pufferfish": {
+      "min": 10.0,
+      "max": 30.0
     }
-  },
-  "defaultSize": {
-    "min": 5.0,
-    "max": 15.0
   }
 }
