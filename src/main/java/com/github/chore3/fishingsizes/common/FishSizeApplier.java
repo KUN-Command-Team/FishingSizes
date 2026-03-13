@@ -1,4 +1,6 @@
-package com.github.chore3.fishingsizes.main;
+package com.github.chore3.fishingsizes.common;
+
+import com.github.chore3.fishingsizes.Fishingsizes;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -11,7 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Fishingsizes.MOD_ID)
-public class EventOverride {
+public class FishSizeApplier {
     @SubscribeEvent
     public static void onItemFished(ItemFishedEvent event) {
         if (!event.getEntity().level().isClientSide) {

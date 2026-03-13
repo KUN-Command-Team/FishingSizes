@@ -1,4 +1,4 @@
-package com.github.chore3.fishingsizes.main;
+package com.github.chore3.fishingsizes;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
