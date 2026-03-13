@@ -26,7 +26,6 @@ public class FishSizesReloadListener extends SimplePreparableReloadListener<Map<
     private static FishSizesReloadListener INSTANCE;
 
     private final Map<Item, FishSize> fishSizes = new HashMap<>();
-    private FishSize defaultSize = null;
     private final List<ResourceLocation> keys = new ArrayList<>();
 
     public static FishSizesReloadListener create() {
@@ -61,7 +60,6 @@ public class FishSizesReloadListener extends SimplePreparableReloadListener<Map<
     protected void apply(Map<String, JsonObject> prepared, ResourceManager resourceManager, ProfilerFiller profiler) {
         fishSizes.clear();
         keys.clear();
-        defaultSize = null;
 
         for (Map.Entry<String, JsonObject> entry : prepared.entrySet()) {
             String packId = entry.getKey();
@@ -76,10 +74,7 @@ public class FishSizesReloadListener extends SimplePreparableReloadListener<Map<
             if (parsed.replace()) {
                 fishSizes.clear();
                 keys.clear();
-                defaultSize = null;
             }
-
-            parsed.defaultSize().ifPresent(size -> defaultSize = size);
 
             for (Map.Entry<ResourceLocation, FishSize> sizeEntry : parsed.sizes().entrySet()) {
                 ResourceLocation id = sizeEntry.getKey();
@@ -94,14 +89,14 @@ public class FishSizesReloadListener extends SimplePreparableReloadListener<Map<
             }
         }
 
-        Fishingsizes.LOGGER.info("Loaded {} fish size entries (defaultSize: {})", fishSizes.size(), defaultSize != null);
+        Fishingsizes.LOGGER.info("Loaded {} fish size entries", fishSizes.size());
     }
 
     @Nullable
     public static FishSize getSize(@Nullable ItemStack stack) {
         FishSizesReloadListener listener = getOrCreate();
-        if (stack == null || stack.isEmpty()) return listener.defaultSize;
-        return listener.fishSizes.getOrDefault(stack.getItem(), listener.defaultSize);
+        if (stack == null || stack.isEmpty()) return null;
+        return listener.fishSizes.get(stack.getItem());
     }
 
     public static List<ResourceLocation> getKeys() {
