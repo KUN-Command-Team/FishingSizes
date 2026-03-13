@@ -35,11 +35,14 @@ public class FishSizeApplier {
 
         loreTag.add(StringTag.valueOf(Serializer.toJson(
                 Component.empty()
-                        .append(Component.translatable("fishSize.size").withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
-                        .append(Component.literal(": ").withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
-                        .append(Component.literal(String.format("%.1f", size)).withStyle(style -> style.withColor(ChatFormatting.AQUA).withItalic(false)))
-                        .append(Component.literal(" cm").withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
-
+                        .append(Component.translatableWithFallback("fishSize.size", "Size")
+                                .withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
+                        .append(Component.literal(": ")
+                                .withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
+                        .append(Component.literal(String.format("%.1f", size))
+                                .withStyle(style -> style.withColor(ChatFormatting.AQUA).withItalic(false)))
+                        .append(Component.literal(" cm")
+                                .withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
         )));
         displayTag.put("Lore", loreTag);
     }
