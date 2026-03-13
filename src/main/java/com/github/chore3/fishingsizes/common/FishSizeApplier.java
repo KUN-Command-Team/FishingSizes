@@ -3,6 +3,7 @@ package com.github.chore3.fishingsizes.common;
 import com.github.chore3.fishingsizes.Fishingsizes;
 import com.github.chore3.fishingsizes.server.data.FishSize;
 import com.github.chore3.fishingsizes.server.data.FishSizesReloadListener;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -33,7 +34,15 @@ public class FishSizeApplier {
                 : new ListTag();
 
         loreTag.add(StringTag.valueOf(Serializer.toJson(
-                Component.literal(String.format("Size: %.2f", size))
+                Component.empty()
+                        .append(Component.translatableWithFallback("fishSize.size", "Size")
+                                .withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
+                        .append(Component.literal(": ")
+                                .withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
+                        .append(Component.literal(String.format("%.1f", size))
+                                .withStyle(style -> style.withColor(ChatFormatting.AQUA).withItalic(false)))
+                        .append(Component.literal(" cm")
+                                .withStyle(style -> style.withColor(ChatFormatting.WHITE).withItalic(false)))
         )));
         displayTag.put("Lore", loreTag);
     }
