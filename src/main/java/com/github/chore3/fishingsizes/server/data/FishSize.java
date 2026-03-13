@@ -2,6 +2,7 @@ package com.github.chore3.fishingsizes.server.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.RandomSource;
 
 public record FishSize(float min, float max) {
     public static final Codec<FishSize> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -9,7 +10,7 @@ public record FishSize(float min, float max) {
             Codec.FLOAT.fieldOf("max").forGetter(FishSize::max)
     ).apply(instance, FishSize::new));
 
-    public float randomSize(java.util.Random random) {
+    public float randomSize(RandomSource random) {
         if (max <= min) return min;
         return min + random.nextFloat() * (max - min);
     }
